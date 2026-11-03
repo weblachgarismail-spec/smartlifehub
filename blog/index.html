@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="blogTitle">Blog — SmartLife Hub</title>
+  <meta name="description" content="SmartLife Hub blog — practical guides on food waste, kitchen organization, productivity and digital life.">
+  <link rel="canonical" href="https://smartlifehub.com/blog/">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="../assets/js/i18n.js" defer></script>
+  <script src="../assets/js/main.js" defer></script>
+  <script src="../_data/blog.json" id="blog-data" defer></script>
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <nav class="nav">
+        <button class="mobile-menu-btn" aria-label="Menu" aria-expanded="false">☰</button>
+        <div class="nav-brand"><span>Smart</span>Life Hub</div>
+        <div class="lang-switch">
+          <button class="lang-btn active" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="fr">FR</button>
+          <button class="lang-btn" data-lang="ar">AR</button>
+        </div>
+        <ul class="nav-links">
+          <li><a href="../index.html" data-i18n="navApps">Apps</a></li>
+          <li><a href="index.html" data-i18n="navBlog">Blog</a></li>
+          <li><a href="../about.html" data-i18n="navAbout">About</a></li>
+          <li><a href="../contact.html" data-i18n="navContact">Contact</a></li>
+          <li><a href="../privacy.html" data-i18n="navPrivacy">Privacy</a></li>
+          <li><a href="../admin.html" style="background:var(--dark-green);color:var(--white);padding:0.4rem 0.8rem;border-radius:6px;font-size:0.85rem;">Admin</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 data-i18n="blogTitle">Latest Articles</h2>
+        <p data-i18n="blogSub">Practical guides on food waste, kitchen organization, productivity and digital life.</p>
+      </div>
+
+      <!-- Category filters -->
+      <div style="display:flex; gap:0.5rem; margin-bottom:2rem; flex-wrap:wrap;">
+        <button class="cat-filter active" data-cat="all" style="background:var(--dark-green);color:var(--white);border:none;padding:0.4rem 1rem;border-radius:20px;cursor:pointer;">All</button>
+        <button class="cat-filter" data-cat="smart-kitchen" style="background:transparent;border:1px solid var(--border);padding:0.4rem 1rem;border-radius:20px;cursor:pointer;">Smart Kitchen</button>
+        <button class="cat-filter" data-cat="digital-life" style="background:transparent;border:1px solid var(--border);padding:0.4rem 1rem;border-radius:20px;cursor:pointer;">Digital Life</button>
+        <button class="cat-filter" data-cat="privacy-security" style="background:transparent;border:1px solid var(--border);padding:0.4rem 1rem;border-radius:20px;cursor:pointer;">Privacy & Security</button>
+      </div>
+
+      <div id="blogGrid" class="blog-grid">
+        <!-- Posts injected here by JS -->
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-bottom">
+        <span data-i18n="footerRights">© 2026 SmartLife Hub. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      fetch('../_data/blog.json')
+        .then(r => r.json())
+        .then(data => {
+          const grid = document.getElementById('blogGrid');
+          const filters = document.querySelectorAll('.cat-filter');
+          let currentFilter = 'all';
+
+          function render(filter) {
+            grid.innerHTML = '';
+            const posts = data.posts.filter(p => filter === 'all' || p.category === filter);
+            posts.forEach(post => {
+              const el = document.createElement('article');
+              el.className = 'blog-card';
+              el.innerHTML = `
+                <img src="${post.image}" alt="${post.title}" style="width:100%;height:200px;object-fit:cover;background:var(--cream-dark);">
+                <div class="blog-content" style="padding:1.5rem;">
+                  <div class="blog-meta" style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.5rem;display:flex;gap:1rem;align-items:center;">
+                    <span>${post.categoryLabel}</span>
+                    <span>${post.readTime}</span>
+                    <span>${post.date}</span>
+                  </div>
+                  <h3 style="font-size:1.15rem;color:var(--dark-green);margin-bottom:0.5rem;">${post.title}</h3>
+                  <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:1rem;">${post.excerpt}</p>
+                  <a href="blog-${post.slug}.html" class="read-more" style="display:inline-flex;align-items:center;gap:0.3rem;font-weight:600;font-size:0.9rem;color:var(--sage-dark);">Read more →</a>
+                </div>
+              `;
+              grid.appendChild(el);
+            });
+          }
+
+          filters.forEach(btn => {
+            btn.addEventListener('click', () => {
+              filters.forEach(b => {
+                b.style.background = 'transparent';
+                b.style.color = 'var(--text-muted)';
+                b.style.borderColor = 'var(--border)';
+              });
+              btn.style.background = 'var(--dark-green)';
+              btn.style.color = 'var(--white)';
+              btn.style.borderColor = 'var(--dark-green)';
+              currentFilter = btn.dataset.cat;
+              render(currentFilter);
+            });
+          });
+
+          render('all');
+        })
+        .catch(err => {
+          console.error('Failed to load blog data:', err);
+          document.getElementById('blogGrid').innerHTML = '<p style="color:var(--text-muted);">Unable to load articles. Please check the data file.</p>';
+        });
+    });
+  </script>
+</body>
+</html>

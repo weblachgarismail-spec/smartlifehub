@@ -1,0 +1,9 @@
+{
+  "name": "SmartLife Hub",
+  "short_name": "SmartLife Hub",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FDFBF7",
+  "theme_color": "#2D5A27",
+  "icons": []
+}

@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartLife Hub — Admin Editor</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    .admin-container { max-width: 900px; margin: 2rem auto; padding: 0 1.5rem; }
+    .admin-tabs { display: flex; gap: 0.5rem; margin-bottom: 2rem; border-bottom: 1px solid var(--border); }
+    .admin-tabs button { background: none; border: none; padding: 0.75rem 1.5rem; cursor: pointer; font-weight: 600; color: var(--text-muted); border-bottom: 2px solid transparent; }
+    .admin-tabs button.active { color: var(--dark-green); border-bottom-color: var(--dark-green); }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+    .form-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.5rem; }
+    .form-group { margin-bottom: 1rem; }
+    .form-group label { display: block; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+    .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: 6px; font-family: inherit; font-size: 1rem; }
+    .form-group textarea { min-height: 120px; font-family: inherit; }
+    .btn-save { background: var(--dark-green); color: var(--white); border: none; padding: 0.8rem 1.5rem; border-radius: 6px; font-weight: 600; cursor: pointer; }
+    .btn-save:hover { background: var(--sage-dark); }
+    .btn-export { background: var(--accent); color: var(--white); border: none; padding: 0.8rem 1.5rem; border-radius: 6px; font-weight: 600; cursor: pointer; margin-left: 0.5rem; }
+    .btn-export:hover { background: #b8921f; }
+    .item-list { margin-top: 1rem; }
+    .item-card { background: var(--cream); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem; margin-bottom: 0.75rem; display: flex; justify-content: space-between; align-items: center; }
+    .item-card h4 { margin: 0 0 0.5rem 0; color: var(--dark-green); }
+    .item-card p { margin: 0; color: var(--text-muted); font-size: 0.85rem; }
+    .item-actions { display: flex; gap: 0.5rem; }
+    .btn-edit { background: transparent; border: 1px solid var(--border); padding: 0.4rem 0.8rem; border-radius: 4px; cursor: pointer; font-size: 0.85rem; }
+    .btn-edit:hover { border-color: var(--dark-green); color: var(--dark-green); }
+    .btn-delete { background: transparent; border: 1px solid #e57373; color: #e57373; padding: 0.4rem 0.8rem; border-radius: 4px; cursor: pointer; font-size: 0.85rem; }
+    .btn-delete:hover { background: #e57373; color: var(--white); }
+    .empty-state { text-align: center; color: var(--text-muted); padding: 2rem; }
+    .import-export { display: flex; gap: 0.5rem; margin-top: 1rem; align-items: center; }
+    #importFile { font-size: 0.85rem; }
+    .alert { padding: 0.75rem; border-radius: 6px; margin-bottom: 1rem; font-size: 0.9rem; }
+    .alert-success { background: #e7f4ea; color: var(--dark-green); border: 1px solid #b8dfc4; }
+    .alert-error { background: #fdecea; color: #e57373; border: 1px solid #f5b7b1; }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <nav class="nav">
+        <a href="index.html" class="nav-brand"><span>Smart</span>Life Hub</a>
+        <a href="admin.html" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Admin</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="admin-container">
+    <h1 style="color: var(--dark-green); margin-bottom: 0.5rem;">🛠️ Content Editor</h1>
+    <p style="color: var(--text-muted); margin-bottom: 2rem;">Add, edit, and manage blog posts and applications. Export JSON to upload to GitHub.</p>
+
+    <div id="alert"></div>
+
+    <div class="admin-tabs">
+      <button class="tab-btn active" data-tab="blog">📝 Blog Posts</button>
+      <button class="tab-btn" data-tab="apps">📱 Applications</button>
+    </div>
+
+    <!-- Blog Tab -->
+    <div id="tab-blog" class="tab-panel active">
+      <div class="form-card">
+        <h3 style="margin-top: 0;">Add / Edit Blog Post</h3>
+        <form id="blogForm">
+          <input type="hidden" id="blogId">
+          <div class="form-group">
+            <label>Title</label>
+            <input type="text" id="blogTitle" placeholder="e.g. How to Reduce Food Waste at Home" required>
+          </div>
+          <div class="form-group">
+            <label>Slug (URL-friendly)</label>
+            <input type="text" id="blogSlug" placeholder="e.g. how-to-reduce-food-waste" required>
+          </div>
+          <div class="form-group">
+            <label>Category</label>
+            <select id="blogCategory" required>
+              <option value="smart-kitchen">Smart Kitchen (Alimentation & anti-gaspillage)</option>
+              <option value="digital-life">Digital Life (Technologie & productivité)</option>
+              <option value="privacy-security">Privacy & Security (Sécurité numérique)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Language</label>
+            <select id="blogLang" required>
+              <option value="en">English</option>
+              <option value="fr">French</option>
+              <option value="ar">Arabic</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Excerpt</label>
+            <textarea id="blogExcerpt" placeholder="Short summary for listing pages" required></textarea>
+          </div>
+          <div class="form-group">
+            <label>Content (HTML)</label>
+            <textarea id="blogContent" placeholder="Full article HTML content" required></textarea>
+          </div>
+          <div class="form-group">
+            <label>Image URL</label>
+            <input type="text" id="blogImage" placeholder="https://images.unsplash.com/...">
+          </div>
+          <div class="form-group">
+            <label>Read Time</label>
+            <input type="text" id="blogReadTime" placeholder="e.g. 5 min">
+          </div>
+          <div class="form-group">
+            <label>Date (YYYY-MM-DD)</label>
+            <input type="date" id="blogDate" required>
+          </div>
+          <div style="display: flex; gap: 0.5rem;">
+            <button type="submit" class="btn-save">Save Post</button>
+            <button type="button" class="btn-export" onclick="exportJSON('blog')">Export blog.json</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="item-list">
+        <h3>Existing Posts</h3>
+        <div id="blogList"></div>
+      </div>
+    </div>
+
+    <!-- Apps Tab -->
+    <div id="tab-apps" class="tab-panel">
+      <div class="form-card">
+        <h3 style="margin-top: 0;">Add / Edit Application</h3>
+        <form id="appForm">
+          <input type="hidden" id="appId">
+          <div class="form-group">
+            <label>App Name</label>
+            <input type="text" id="appName" placeholder="e.g. FreshGuard" required>
+          </div>
+          <div class="form-group">
+            <label>Tagline</label>
+            <input type="text" id="appTagline" placeholder="Short description">
+          </div>
+          <div class="form-group">
+            <label>Description (HTML)</label>
+            <textarea id="appDescription" placeholder="Full app description" required></textarea>
+          </div>
+          <div class="form-group">
+            <label>Category</label>
+            <input type="text" id="appCategory" placeholder="e.g. Smart Kitchen">
+          </div>
+          <div class="form-group">
+            <label>Icon (emoji)</label>
+            <input type="text" id="appIcon" placeholder="🥦" maxlength="2">
+          </div>
+          <div class="form-group">
+            <label>Features (one per line)</label>
+            <textarea id="appFeatures" placeholder="Feature 1\nFeature 2\nFeature 3"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Privacy URL</label>
+            <input type="text" id="appPrivacy" placeholder="./privacy.html">
+          </div>
+          <div class="form-group">
+            <label>Support URL</label>
+            <input type="text" id="appSupport" placeholder="./support.html">
+          </div>
+          <div class="form-group">
+            <label>Play Store URL</label>
+            <input type="text" id="appPlayStore" placeholder="https://play.google.com/...">
+          </div>
+          <div class="form-group">
+            <label>App Store URL</label>
+            <input type="text" id="appAppStore" placeholder="https://apps.apple.com/...">
+          </div>
+          <div class="form-group">
+            <label>Direct APK URL</label>
+            <input type="text" id="appApk" placeholder="https://.../app-release.apk">
+          </div>
+          <div style="display: flex; gap: 0.5rem;">
+            <button type="submit" class="btn-save">Save App</button>
+            <button type="button" class="btn-export" onclick="exportJSON('apps')">Export apps.json</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="item-list">
+        <h3>Existing Apps</h3>
+        <div id="appList"></div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-bottom">
+        <span>© 2026 SmartLife Hub. Admin Editor.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script>
+    // ---------- Admin Logic ----------
+    const state = {
+      blog: JSON.parse(localStorage.getItem('slh_blog') || JSON.stringify({posts: []})),
+      apps: JSON.parse(localStorage.getItem('slh_apps') || JSON.stringify({apps: []}))
+    };
+
+    let currentTab = 'blog';
+    let editId = null;
+    let editType = null;
+
+    const alertEl = document.getElementById('alert');
+
+    function showAlert(msg, type = 'success') {
+      alertEl.innerHTML = `<div class="alert alert-${type}">${msg}</div>`;
+      setTimeout(() => alertEl.innerHTML = '', 4000);
+    }
+
+    function switchTab(tab) {
+      currentTab = tab;
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.toggle('active', p.id === `tab-${tab}`));
+      renderList(tab);
+      resetForm(tab);
+    }
+
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+    });
+
+    // ---------- Blog ----------
+    const blogForm = document.getElementById('blogForm');
+    blogForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const post = {
+        id: document.getElementById('blogId').value || Date.now().toString(),
+        title: document.getElementById('blogTitle').value,
+        slug: document.getElementById('blogSlug').value,
+        category: document.getElementById('blogCategory').value,
+        categoryLabel: document.getElementById('blogCategory').options[document.getElementById('blogCategory').selectedIndex].text,
+        excerpt: document.getElementById('blogExcerpt').value,
+        content: document.getElementById('blogContent').value,
+        image: document.getElementById('blogImage').value,
+        readTime: document.getElementById('blogReadTime').value || '',
+        date: document.getElementById('blogDate').value || new Date().toISOString().split('T')[0],
+        lang: document.getElementById('blogLang').value
+      };
+
+      if (editId) {
+        state.blog.posts = state.blog.posts.map(p => p.id === editId ? post : p);
+        showAlert('Post updated.');
+      } else {
+        state.blog.posts.unshift(post);
+        showAlert('Post added.');
+      }
+      localStorage.setItem('slh_blog', JSON.stringify(state.blog));
+      renderList('blog');
+      resetForm('blog');
+    });
+
+    function editBlog(id) {
+      const post = state.blog.posts.find(p => p.id === id);
+      if (!post) return;
+      editId = id;
+      editType = 'blog';
+      document.getElementById('blogId').value = post.id;
+      document.getElementById('blogTitle').value = post.title;
+      document.getElementById('blogSlug').value = post.slug;
+      document.getElementById('blogCategory').value = post.category;
+      document.getElementById('blogLang').value = post.lang;
+      document.getElementById('blogExcerpt').value = post.excerpt;
+      document.getElementById('blogContent').value = post.content;
+      document.getElementById('blogImage').value = post.image || '';
+      document.getElementById('blogReadTime').value = post.readTime || '';
+      document.getElementById('blogDate').value = post.date;
+      window.scrollTo(0, 0);
+    }
+
+    function deleteBlog(id) {
+      if (!confirm('Delete this post?')) return;
+      state.blog.posts = state.blog.posts.filter(p => p.id !== id);
+      localStorage.setItem('slh_blog', JSON.stringify(state.blog));
+      if (editId === id) resetForm('blog');
+      renderList('blog');
+      showAlert('Post deleted.');
+    }
+
+    // ---------- Apps ----------
+    const appForm = document.getElementById('appForm');
+    appForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const features = document.getElementById('appFeatures').value.split('\n').map(f => f.trim()).filter(f => f);
+      const app = {
+        id: document.getElementById('appId').value || Date.now().toString(),
+        name: document.getElementById('appName').value,
+        tagline: document.getElementById('appTagline').value,
+        description: document.getElementById('appDescription').value,
+        category: document.getElementById('appCategory').value,
+        icon: document.getElementById('appIcon').value || '📱',
+        features,
+        privacyUrl: document.getElementById('appPrivacy').value || './privacy.html',
+        supportUrl: document.getElementById('appSupport').value || './support.html',
+        downloadLinks: {
+          playStore: document.getElementById('appPlayStore').value || '#',
+          appStore: document.getElementById('appAppStore').value || '#',
+          apk: document.getElementById('appApk').value || '#'
+        },
+        featured: true
+      };
+
+      if (editId) {
+        state.apps.apps = state.apps.apps.map(a => a.id === editId ? app : a);
+        showAlert('App updated.');
+      } else {
+        state.apps.apps.unshift(app);
+        showAlert('App added.');
+      }
+      localStorage.setItem('slh_apps', JSON.stringify(state.apps));
+      renderList('apps');
+      resetForm('apps');
+    });
+
+    function editApp(id) {
+      const app = state.apps.apps.find(a => a.id === id);
+      if (!app) return;
+      editId = id;
+      editType = 'apps';
+      document.getElementById('appId').value = app.id;
+      document.getElementById('appName').value = app.name;
+      document.getElementById('appTagline').value = app.tagline;
+      document.getElementById('appDescription').value = app.description;
+      document.getElementById('appCategory').value = app.category;
+      document.getElementById('appIcon').value = app.icon;
+      document.getElementById('appFeatures').value = (app.features || []).join('\n');
+      document.getElementById('appPrivacy').value = app.privacyUrl;
+      document.getElementById('appSupport').value = app.supportUrl;
+      document.getElementById('appPlayStore').value = app.downloadLinks?.playStore || '#';
+      document.getElementById('appAppStore').value = app.downloadLinks?.appStore || '#';
+      document.getElementById('appApk').value = app.downloadLinks?.apk || '#';
+      window.scrollTo(0, 0);
+    }
+
+    function deleteApp(id) {
+      if (!confirm('Delete this app?')) return;
+      state.apps.apps = state.apps.apps.filter(a => a.id !== id);
+      localStorage.setItem('slh_apps', JSON.stringify(state.apps));
+      if (editId === id) resetForm('apps');
+      renderList('apps');
+      showAlert('App deleted.');
+    }
+
+    // ---------- Render ----------
+    function renderList(type) {
+      const container = document.getElementById(`${type}List`);
+      const items = type === 'blog' ? state.blog.posts : state.apps.apps;
+      container.innerHTML = '';
+
+      if (items.length === 0) {
+        container.innerHTML = '<div class="empty-state">No items yet. Add your first one above.</div>';
+        return;
+      }
+
+      items.forEach(item => {
+        const el = document.createElement('div');
+        el.className = 'item-card';
+        el.innerHTML = `
+          <div>
+            <h4>${item.title || item.name}</h4>
+            <p>${item.slug || ''} • ${item.category || ''} • ${item.lang || ''}</p>
+          </div>
+          <div class="item-actions">
+            <button class="btn-edit" onclick="edit${type.charAt(0).toUpperCase() + type.slice(1)}('${item.id}')">Edit</button>
+            <button class="btn-delete" onclick="delete${type.charAt(0).toUpperCase() + type.slice(1)}('${item.id}')">Delete</button>
+          </div>
+        `;
+        container.appendChild(el);
+      });
+    }
+
+    function resetForm(type) {
+      editId = null;
+      if (type === 'blog') {
+        blogForm.reset();
+        document.getElementById('blogDate').value = new Date().toISOString().split('T')[0];
+      } else {
+        appForm.reset();
+      }
+    }
+
+    function exportJSON(type) {
+      const data = type === 'blog' ? state.blog : state.apps;
+      const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${type}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showAlert(`${type}.json exported. Upload it to _data/ folder on GitHub.`);
+    }
+
+    // Initialize with seed data if empty
+    if (state.blog.posts.length === 0) {
+      state.blog.posts = [
+        {
+          id: "1", title: "How to Reduce Food Waste at Home", slug: "how-to-reduce-food-waste-at-home",
+          category: "smart-kitchen", categoryLabel: "Smart Kitchen",
+          excerpt: "Simple habits to track expiry dates, organize your fridge, and save money every week.",
+          content: "<p>Simple habits to track expiry dates, organize your fridge, and save money every week.</p>",
+          image: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=900&auto=format&fit=crop",
+          readTime: "5 min", date: "2026-10-20", lang: "en"
+        },
+        {
+          id: "2", title: "Best Food Expiry Date Tracker Apps", slug: "best-food-expiry-date-tracker-apps",
+          category: "smart-kitchen", categoryLabel: "Smart Kitchen",
+          excerpt: "A comparison of top apps to prevent food waste, featuring FreshGuard.",
+          content: "<p>A comparison of top apps to prevent food waste, featuring FreshGuard.</p>",
+          image: "https://images.unsplash.com/photo-1517683974241-9379007298d1?w=900&auto=format&fit=crop",
+          readTime: "6 min", date: "2026-10-22", lang: "en"
+        },
+        {
+          id: "3", title: "Best Free Android Productivity Apps 2026", slug: "best-android-productivity-apps-2026",
+          category: "digital-life", categoryLabel: "Digital Life",
+          excerpt: "Tools to organize your digital life and upcoming mobile projects.",
+          content: "<p>From task managers to note-taking apps...</p>",
+          image: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=900&auto=format&fit=crop",
+          readTime: "6 min", date: "2026-10-25", lang: "en"
+        },
+        {
+          id: "4", title: "Mobile App Privacy: What to Check Before Installing", slug: "mobile-app-privacy-checklist",
+          category: "privacy-security", categoryLabel: "Privacy & Security",
+          excerpt: "Permissions, data collection, and local-first apps explained.",
+          content: "<p>Before installing any app, check what permissions it asks for...</p>",
+          image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=900&auto=format&fit=crop",
+          readTime: "5 min", date: "2026-10-27", lang: "en"
+        }
+      ];
+      localStorage.setItem('slh_blog', JSON.stringify(state.blog));
+    }
+
+    if (state.apps.apps.length === 0) {
+      state.apps.apps = [
+        {
+          id: "freshguard", name: "FreshGuard",
+          tagline: "Anti-food-waste inventory with expiry reminders",
+          description: "FreshGuard helps you track food expiry dates, reduce waste, and save money.",
+          category: "Smart Kitchen", icon: "🥦",
+          features: ["Inventory by location", "Barcode scanner", "Expiry reminders", "Recipes", "Savings stats", "4 languages"],
+          privacyUrl: "./privacy.html", supportUrl: "./support.html",
+          downloadLinks: { playStore: "#", appStore: "#", apk: "#" },
+          featured: true
+        }
+      ];
+      localStorage.setItem('slh_apps', JSON.stringify(state.apps));
+    }
+
+    renderList('blog');
+  </script>
+</body>
+</html>

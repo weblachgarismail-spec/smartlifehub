@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Apps — SmartLife Hub</title>
+  <meta name="description" content="Discover our mobile apps: FreshGuard and more.">
+  <link rel="canonical" href="https://smartlifehub.com/apps/">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="../assets/js/i18n.js" defer></script>
+  <script src="../assets/js/main.js" defer></script>
+  <script src="../_data/apps.json" id="apps-data" defer></script>
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <nav class="nav">
+        <button class="mobile-menu-btn" aria-label="Menu" aria-expanded="false">☰</button>
+        <div class="nav-brand"><span>Smart</span>Life Hub</div>
+        <div class="lang-switch">
+          <button class="lang-btn active" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="fr">FR</button>
+          <button class="lang-btn" data-lang="ar">AR</button>
+        </div>
+        <ul class="nav-links">
+          <li><a href="index.html" data-i18n="navApps">Apps</a></li>
+          <li><a href="../index.html#blog" data-i18n="navBlog">Blog</a></li>
+          <li><a href="../about.html" data-i18n="navAbout">About</a></li>
+          <li><a href="../contact.html" data-i18n="navContact">Contact</a></li>
+          <li><a href="../privacy.html" data-i18n="navPrivacy">Privacy</a></li>
+          <li><a href="../admin.html" style="background:var(--dark-green);color:var(--white);padding:0.4rem 0.8rem;border-radius:6px;font-size:0.85rem;">Admin</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header" style="text-align:left;">
+        <h2>Our Apps</h2>
+        <p>Mobile tools built to reduce waste and simplify daily routines.</p>
+      </div>
+
+      <div id="appsGrid" class="card-grid">
+        <!-- Apps injected here -->
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-bottom">
+        <span data-i18n="footerRights">© 2026 SmartLife Hub. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    fetch('../_data/apps.json')
+      .then(r => r.json())
+      .then(data => {
+        const grid = document.getElementById('appsGrid');
+        data.apps.forEach(app => {
+          const featuresHtml = app.features.map(f => `<li style="color:var(--text-muted);font-size:0.9rem;">${f}</li>`).join('');
+          const el = document.createElement('article');
+          el.className = 'card';
+          el.innerHTML = `
+            <div style="font-size:2.5rem;margin-bottom:1rem;">${app.icon}</div>
+            <h3 style="color:var(--dark-green);margin-bottom:0.5rem;">${app.name}</h3>
+            <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:1rem;">${app.tagline}</p>
+            <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:1rem;">${app.description}</p>
+            <ul style="margin-bottom:1rem;">${featuresHtml}</ul>
+            <a href="freshguard/" class="btn btn-primary" style="width:100%;justify-content:center;">View Details</a>
+          `;
+          grid.appendChild(el);
+        });
+      })
+      .catch(err => console.error(err));
+  </script>
+</body>
+</html>

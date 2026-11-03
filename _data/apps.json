@@ -1,0 +1,31 @@
+{
+  "apps": [
+    {
+      "id": "freshguard",
+      "name": "FreshGuard",
+      "tagline": "Anti-food-waste inventory with expiry reminders",
+      "description": "FreshGuard helps you track food expiry dates, reduce waste, and save money. Features barcode scanner, local notifications, recipes matched to your stock, and savings statistics. 100% offline, no account, no cloud.",
+      "category": "Smart Kitchen",
+      "icon": "🥦",
+      "features": [
+        "Inventory by location (fridge, freezer, pantry)",
+        "Barcode scanner with just-in-time camera permission",
+        "\"Use by\" vs \"best before\" date types you control",
+        "Local expiry reminders (no internet needed)",
+        "14+ recipes matched to your actual stock",
+        "Savings stats: consumed + donated − discarded",
+        "4 languages: EN / FR / ES / AR",
+        "Dark mode and responsive design"
+      ],
+      "screenshots": [],
+      "downloadLinks": {
+        "playStore": "#",
+        "appStore": "#",
+        "apk": "#"
+      },
+      "privacyUrl": "./privacy.html",
+      "supportUrl": "./support.html",
+      "featured": true
+    }
+  ]
+}
