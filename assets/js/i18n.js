@@ -86,7 +86,7 @@ const translations = {
     navContact: "اتصل",
     navPrivacy: "الخصوصية",
     heroTitle: "أدوات أكثر ذكاءً للحياة اليومية.",
-    heroSub: "FreshGuard —停止 هدر الطعام. تتبع تواريخ الانتهاء، وفّر المال، اطبخ ما لديك.",
+    heroSub: "FreshGuard — توقف عن هدر الطعام. تتبع تواريخ الانتهاء، وفر المال، واطبخ ما لديك.",
     btnApps: "اكتشف التطبيقات",
     btnBlog: "اقرأ المدونة",
     appsTitle: "تطبيقاتنا",
