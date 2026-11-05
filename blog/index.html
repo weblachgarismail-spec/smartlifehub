@@ -9,8 +9,55 @@
   <link rel="stylesheet" href="../assets/css/style.css">
   <script src="../assets/js/i18n.js" defer></script>
   <script src="../assets/js/main.js" defer></script>
-  <!-- Blog data: 17 posts (11 EN + 4 FR + 2 News) with images, categories, and read times -->
-  <script src="../_data/blog.json" id="blog-data" defer></script>
+  <style>
+    .blog-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+    .cat-filter {
+      background: transparent;
+      color: var(--text-muted);
+      border: 2px solid var(--border);
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-family: inherit;
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+    .cat-filter:hover {
+      border-color: var(--dark-green);
+      color: var(--dark-green);
+    }
+    .cat-filter.active {
+      background: var(--dark-green);
+      color: var(--white);
+      border-color: var(--dark-green);
+    }
+    .blog-card h3 a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .blog-card-media {
+      display: block;
+      overflow: hidden;
+    }
+    .blog-card-media img {
+      transition: transform 0.3s ease;
+    }
+    .blog-card:hover .blog-card-media img {
+      transform: scale(1.05);
+    }
+    .blog-status {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: var(--text-muted);
+      grid-column: 1 / -1;
+    }
+  </style>
 </head>
 <body>
   <header class="header">
@@ -42,17 +89,16 @@
         <p data-i18n="blogSub">Practical guides on food waste, kitchen organization, productivity and digital life.</p>
       </div>
 
-      <!-- Category filters -->
-      <div style="display:flex; gap:0.5rem; margin-bottom:2rem; flex-wrap:wrap; justify-content:center;">
-        <button class="cat-filter active" data-filter="all" style="background:var(--dark-green);color:var(--white);border:none;padding:0.5rem 1rem;border-radius:25px;cursor:font-size:0.9rem;">All</button>
-        <button class="cat-filter" data-filter="smart-kitchen" style="background:transparent;border:2px solid var(--border);padding:0.5rem 1rem;border-radius:25px;cursor:pointer;font-size:0.9rem;">Smart Kitchen</button>
-        <button class="cat-filter" data-filter="digital-life" style="background:transparent;border:2px solid var(--border);padding:0.5rem 1rem;border-radius:25px;cursor:pointer;font-size:0.9rem;">Digital Life</button>
-        <button class="cat-filter" data-filter="privacy-security" style="background:transparent;border:2px solid var(--border);padding:0.5rem 1rem;border-radius:25px;cursor:pointer;font-size:0.9rem;">Privacy & Security</button>
-        <button class="cat-filter" data-filter="news" style="background:transparent;border:2px solid var(--border);padding:0.5rem 1rem;border-radius:25px;cursor:pointer;font-size:0.9rem;">News</button>
+      <div class="blog-filters" role="group" aria-label="Filter articles by category">
+        <button class="cat-filter active" data-filter="all" aria-pressed="true">All</button>
+        <button class="cat-filter" data-filter="smart-kitchen" aria-pressed="false">Smart Kitchen</button>
+        <button class="cat-filter" data-filter="digital-life" aria-pressed="false">Digital Life</button>
+        <button class="cat-filter" data-filter="privacy-security" aria-pressed="false">Privacy &amp; Security</button>
+        <button class="cat-filter" data-filter="news" aria-pressed="false">News</button>
       </div>
 
-      <div id="blogGrid" class="blog-grid">
-        <!-- Posts will be injected here by JavaScript -->
+      <div id="blogGrid" class="blog-grid" aria-live="polite">
+        <p class="blog-status">Loading articles…</p>
       </div>
     </div>
   </section>
@@ -66,138 +112,111 @@
   </footer>
 
   <script>
-    // ============================================
-    // Blog Index — Manual Implementation
-    // Handles category filtering and article rendering
-    // ============================================
+    (function () {
+      'use strict';
 
-    document.addEventListener('DOMContentLoaded', () => {
-      // Wait for blog data to load
-      const blogDataElement = document.getElementById('blog-data');
-      if (!blogDataElement) {
-        console.error('blog-data element not found');
-        return;
+      var grid = document.getElementById('blogGrid');
+      var filterButtons = Array.prototype.slice.call(document.querySelectorAll('.cat-filter'));
+      var posts = [];
+      var activeFilter = 'all';
+
+      function formatDate(value) {
+        var d = new Date(value);
+        if (!value || isNaN(d.getTime())) return '';
+        return d.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        });
       }
 
-      let blogData = null;
-      try {
-        blogData = JSON.parse(blogDataElement.textContent || blogDataElement.innerText || '');
-      } catch (e) {
-        console.error('Failed to parse blog-data JSON:', e);
-        document.getElementById('blogGrid').innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:2rem;">Unable to load articles. Please check the data file.</p>';
-        return;
+      function articleUrl(slug) {
+        return 'post.html?slug=' + encodeURIComponent(slug);
       }
 
-      const grid = document.getElementById('blogGrid');
-      const filterBtns = document.querySelectorAll('.cat-filter');
-      let activeFilter = 'all';
+      function escapeHtml(value) {
+        return String(value == null ? '' : value)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
 
-      // Render articles based on filter
-      function renderArticles(filter) {
-        const posts = blogData.posts || [];
+      function render(filter) {
+        activeFilter = filter || 'all';
 
-        // Filter posts by category
-        const filteredPosts = filter === 'all'
+        var visible = activeFilter === 'all'
           ? posts
-          : posts.filter(post => post.category === filter);
+          : posts.filter(function (post) {
+              return String(post.category).toLowerCase() === activeFilter;
+            });
 
-        // Clear grid
-        grid.innerHTML = '';
-
-        // If no posts match filter show message
-        if (filteredPosts.length === 0) {
-          grid.innerHTML = `
-            <div style="text-align:center; padding:3rem; color:var(--text-muted);">
-              <p>Aucun article trouvé pour cette catégorie.</p>
-              <p style="font-size:0.9rem; margin-top:1rem;">Veuillez sélectionner une autre catégorie.</p>
-            </div>
-          `;
+        if (!visible.length) {
+          grid.innerHTML = '<p class="blog-status">No articles found in this category yet.<br><small>Try another category.</small></p>';
           return;
         }
 
-        // Render each post
-        filteredPosts.forEach(post => {
-          const article = document.createElement('article');
-          article.className = 'blog-card';
+        grid.innerHTML = visible.map(function (post) {
+          var url = articleUrl(post.slug);
+          var title = escapeHtml(post.title);
+          var excerpt = escapeHtml(post.excerpt);
+          var image = escapeHtml(post.image || '');
+          var category = escapeHtml(post.categoryLabel || post.category || '');
+          var readTime = escapeHtml(post.readTime || '');
+          var date = escapeHtml(formatDate(post.date));
 
-          // Format the date nicely
-          const dateObj = new Date(post.date);
-          const formattedDate = dateObj.toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-          });
+          return '' +
+            '<article class="blog-card">' +
+              '<a class="blog-card-media" href="' + url + '" tabindex="-1" aria-hidden="true">' +
+                '<img src="' + image + '" alt="' + title + '" loading="lazy">' +
+              '</a>' +
+              '<div class="blog-content">' +
+                '<div class="blog-meta">' +
+                  '<span style="color:var(--dark-green);font-weight:600;">' + category + '</span>' +
+                  (readTime ? '<span>' + readTime + '</span>' : '') +
+                  (date ? '<span>' + date + '</span>' : '') +
+                '</div>' +
+                '<h3><a href="' + url + '">' + title + '</a></h3>' +
+                '<p>' + excerpt + '</p>' +
+                '<a class="read-more" href="' + url + '">Read more &rarr;</a>' +
+              '</div>' +
+            '</article>';
+        }).join('');
+      }
 
-          article.innerHTML = `
-            <a href="blog-${post.slug}.html" style="text-decoration:none; color:inherit; display:block;">
-              <div class="blog-image" style="width:100%; height:200px; background:var(--cream-dark); overflow:hidden; position:relative;">
-                <img src="${post.image}" alt="${post.title}" style="width:100%; height:100%; object-fit:cover; transition: transform 0.3s ease;">
-              </div>
-              <div class="blog-content" style="padding:1.5rem;">
-                <div class="blog-meta" style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.5rem; display:flex; justify-content:space-between; align-items:center;">
-                  <span class="blog-category" style="color:var(--dark-green);">${post.categoryLabel}</span>
-                  <span class="blog-readtime">${post.readTime}</span>
-                  <span class="blog-date">${formattedDate}</span>
-                </div>
-                <h3 class="blog-title" style="font-size:1.2rem; color:var(--dark-green); font-weight:600; margin:0.5rem 0; line-height:1.3;">
-                  ${post.title}
-                </h3>
-                <p class="blog-excerpt" style="color:var(--text-muted); font-size:0.9rem; margin:0.5rem 0; line-height:1.4; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;">
-                  ${post.excerpt}
-                </p>
-                <a href="blog-${post.slug}.html" class="read-more-link" style="display:inline-flex; align-items:center; gap:0.5rem; font-weight:600; font-size:0.9rem; color:var(--sage-dark); margin-top:0.5rem; text-decoration:none;">
-                  Read more →
-                </a>
-              </div>
-            </a>
-          `;
-          grid.appendChild(article);
+      function setActiveButton(filter) {
+        filterButtons.forEach(function (button) {
+          var isActive = button.getAttribute('data-filter') === filter;
+          button.classList.toggle('active', isActive);
+          button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
         });
       }
 
-      // Initialize with all articles
-      renderArticles('all');
-
-      // Category filter functionality
-      filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-          // Remove active class from all buttons
-          filterBtns.forEach(b => {
-            b.classList.remove('active');
-            b.style.background = 'transparent';
-            b.style.color = 'var(--text-muted)';
-            b.style.borderColor = 'var(--border)';
-          });
-
-          // Add active class to clicked button
-          btn.classList.add('active');
-          btn.style.background = 'var(--dark-green)';
-          btn.style.color = 'var(--white)';
-          btn.style.borderColor = 'var(--dark-green)';
-
-          // Get the filter value
-          const filterValue = btn.getAttribute('data-filter');
-
-          // Render articles with the selected filter
-          renderArticles(filterValue);
-
-          // Update active filter variable
-          activeFilter = filterValue;
+      filterButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+          var filter = button.getAttribute('data-filter');
+          setActiveButton(filter);
+          render(filter);
         });
       });
 
-      // Optional: Add hover effect to article images
-      const articleImages = grid.querySelectorAll('.blog-image img');
-      articleImages.forEach(img => {
-        img.addEventListener('mouseenter', () => {
-          img.style.transform = 'scale(1.05)';
-          img.style.transition = 'transform 0.3s ease';
+      fetch('../_data/blog.json', { cache: 'no-store' })
+        .then(function (response) {
+          if (!response.ok) {
+            throw new Error('HTTP ' + response.status + ' while loading blog.json');
+          }
+          return response.json();
+        })
+        .then(function (data) {
+          posts = Array.isArray(data.posts) ? data.posts : [];
+          render('all');
+        })
+        .catch(function (error) {
+          console.error('Unable to load blog data:', error);
+          grid.innerHTML = '<p class="blog-status">Unable to load articles. Please check the data file.</p>';
         });
-        img.addEventListener('mouseleave', () => {
-          img.style.transform = 'scale(1)';
-        });
-      });
-    });
+    })();
   </script>
 </body>
 </html>
