@@ -1,10 +1,10 @@
 /* =========================================
-   SmartLife Hub — Simple i18n
+   SmartLife Innovations — Simple i18n
    Languages: en, fr, ar
    ========================================= */
 const translations = {
   en: {
-    siteTitle: "SmartLife Hub",
+    siteTitle: "SmartLife Innovations",
     siteTagline: "Practical technology. Smarter everyday life.",
     navApps: "Apps",
     navBlog: "Blog",
@@ -27,10 +27,10 @@ const translations = {
     blogSub: "Practical guides on food waste, kitchen organization, productivity and digital life.",
     readMore: "Read more →",
     about: "About",
-    aboutText: "SmartLife Hub is an independent editorial platform around mobile apps, technology and digital solutions.",
+    aboutText: "SmartLife Innovations is an independent editorial platform around mobile apps, technology and digital solutions.",
     contact: "Contact",
     contactText: "Questions or partnership inquiries? Get in touch.",
-    footerRights: "© 2026 SmartLife Hub. All rights reserved.",
+    footerRights: "© 2026 SmartLife Innovations. All rights reserved.",
     langEn: "EN",
     langFr: "FR",
     langAr: "AR",
@@ -41,7 +41,7 @@ const translations = {
     comingSoon: "Coming soon"
   },
   fr: {
-    siteTitle: "SmartLife Hub",
+    siteTitle: "SmartLife Innovations",
     siteTagline: "Technologie pratique. Vie quotidienne plus intelligente.",
     navApps: "Applications",
     navBlog: "Blog",
@@ -64,10 +64,10 @@ const translations = {
     blogSub: "Guides pratiques sur le gaspillage alimentaire, l'organisation de cuisine, la productivité et la vie numérique.",
     readMore: "Lire la suite →",
     about: "À propos",
-    aboutText: "SmartLife Hub est une plateforme éditoriale indépendante autour des applications mobiles, de la technologie et des solutions numériques.",
+    aboutText: "SmartLife Innovations est une plateforme éditoriale indépendante autour des applications mobiles, de la technologie et des solutions numériques.",
     contact: "Contact",
     contactText: "Des questions ou une proposition de partenariat ? Contactez-nous.",
-    footerRights: "© 2026 SmartLife Hub. Tous droits réservés.",
+    footerRights: "© 2026 SmartLife Innovations. Tous droits réservés.",
     langEn: "EN",
     langFr: "FR",
     langAr: "AR",

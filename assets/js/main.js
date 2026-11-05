@@ -1,5 +1,5 @@
 /* =========================================
-   SmartLife Hub — Main Script
+   SmartLife Innovations — Main Script
    ========================================= */
 document.addEventListener('DOMContentLoaded', () => {
   // Mobile menu toggle
