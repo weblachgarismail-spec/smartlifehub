@@ -9,6 +9,8 @@
   <meta name="robots" content="index, follow, max-image-preview:large">
   <link rel="canonical" href="https://weblachgarismail-spec.github.io/smartlifehub/blog/best-food-expiry-date-tracker-apps.html">
   <link rel="icon" type="image/svg+xml" href="../assets/img/logo.svg">
+  <link rel="alternate" hreflang="fr" href="https://weblachgarismail-spec.github.io/smartlifehub/blog/meilleures-applications-suivi-dates-peremption.html">
+  <link rel="alternate" hreflang="ar" href="https://weblachgarismail-spec.github.io/smartlifehub/blog/أفضل-تطبيقات-تتبع-تواريخ-الصلاحية.html">
   <link rel="alternate" hreflang="en" href="https://weblachgarismail-spec.github.io/smartlifehub/blog/best-food-expiry-date-tracker-apps.html">
   <link rel="alternate" hreflang="x-default" href="https://weblachgarismail-spec.github.io/smartlifehub/blog/best-food-expiry-date-tracker-apps.html">
   <meta property="og:site_name" content="SmartLife Innovations">
@@ -69,7 +71,7 @@
               <span data-i18n="publishedBy">Published by</span>
               <span>SmartLife Innovations</span>
             </div>
-
+            <a class="lang-alt" href="meilleures-applications-suivi-dates-peremption.html">Lire en français →</a> <a class="lang-alt" href="أفضل-تطبيقات-تتبع-تواريخ-الصلاحية.html">اقرأ بالعربية →</a>
           </header>
           <img class="article-cover" src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=900&amp;auto=format&amp;fit=crop" alt="Best Food Expiry Date Tracker Apps for 2026" loading="eager">
           <div class="ad-slot ad-slot--empty" data-ad-slot="0000000000">
@@ -128,5 +130,20 @@
       </div>
     </div>
   </footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var altMap = {"fr":"meilleures-applications-suivi-dates-peremption.html","ar":"أفضل-تطبيقات-تتبع-تواريخ-الصلاحية.html"};
+      document.querySelectorAll('.lang-btn').forEach(function (btn) {
+        var href = altMap[btn.getAttribute('data-lang')];
+        if (!href) return;
+        btn.addEventListener('click', function (event) {
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          try { window.localStorage.setItem('sli-lang', btn.getAttribute('data-lang')); } catch (e) {}
+          window.location.href = href;
+        }, true);
+      });
+    });
+  </script>
 </body>
 </html>

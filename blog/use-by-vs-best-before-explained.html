@@ -9,6 +9,8 @@
   <meta name="robots" content="index, follow, max-image-preview:large">
   <link rel="canonical" href="https://weblachgarismail-spec.github.io/smartlifehub/blog/use-by-vs-best-before-explained.html">
   <link rel="icon" type="image/svg+xml" href="../assets/img/logo.svg">
+  <link rel="alternate" hreflang="fr" href="https://weblachgarismail-spec.github.io/smartlifehub/blog/consommer-avant-vs-a-consommer-de-preference.html">
+  <link rel="alternate" hreflang="ar" href="https://weblachgarismail-spec.github.io/smartlifehub/blog/استهلك-قبل-مقابل-يفضل-قبل.html">
   <link rel="alternate" hreflang="en" href="https://weblachgarismail-spec.github.io/smartlifehub/blog/use-by-vs-best-before-explained.html">
   <link rel="alternate" hreflang="x-default" href="https://weblachgarismail-spec.github.io/smartlifehub/blog/use-by-vs-best-before-explained.html">
   <meta property="og:site_name" content="SmartLife Innovations">
@@ -69,7 +71,7 @@
               <span data-i18n="publishedBy">Published by</span>
               <span>SmartLife Innovations</span>
             </div>
-
+            <a class="lang-alt" href="consommer-avant-vs-a-consommer-de-preference.html">Lire en français →</a> <a class="lang-alt" href="استهلك-قبل-مقابل-يفضل-قبل.html">اقرأ بالعربية →</a>
           </header>
           <img class="article-cover" src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=900&amp;auto=format&amp;fit=crop" alt="Use By vs Best Before: What Food Dates Really Mean" loading="eager">
           <div class="ad-slot ad-slot--empty" data-ad-slot="0000000000">
@@ -128,5 +130,20 @@
       </div>
     </div>
   </footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var altMap = {"fr":"consommer-avant-vs-a-consommer-de-preference.html","ar":"استهلك-قبل-مقابل-يفضل-قبل.html"};
+      document.querySelectorAll('.lang-btn').forEach(function (btn) {
+        var href = altMap[btn.getAttribute('data-lang')];
+        if (!href) return;
+        btn.addEventListener('click', function (event) {
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          try { window.localStorage.setItem('sli-lang', btn.getAttribute('data-lang')); } catch (e) {}
+          window.location.href = href;
+        }, true);
+      });
+    });
+  </script>
 </body>
 </html>

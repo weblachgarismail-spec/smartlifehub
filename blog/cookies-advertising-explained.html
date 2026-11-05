@@ -9,6 +9,7 @@
   <meta name="robots" content="index, follow, max-image-preview:large">
   <link rel="canonical" href="https://weblachgarismail-spec.github.io/smartlifehub/blog/cookies-advertising-explained.html">
   <link rel="icon" type="image/svg+xml" href="../assets/img/logo.svg">
+  <link rel="alternate" hreflang="fr" href="https://weblachgarismail-spec.github.io/smartlifehub/blog/cookies-publicite-expliques.html">
   <link rel="alternate" hreflang="en" href="https://weblachgarismail-spec.github.io/smartlifehub/blog/cookies-advertising-explained.html">
   <link rel="alternate" hreflang="x-default" href="https://weblachgarismail-spec.github.io/smartlifehub/blog/cookies-advertising-explained.html">
   <meta property="og:site_name" content="SmartLife Innovations">
@@ -69,7 +70,7 @@
               <span data-i18n="publishedBy">Published by</span>
               <span>SmartLife Innovations</span>
             </div>
-
+            <a class="lang-alt" href="cookies-publicite-expliques.html">Lire en français →</a>
           </header>
           <img class="article-cover" src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=900&amp;auto=format&amp;fit=crop" alt="Cookies and Advertising: What You Need to Know" loading="eager">
           <div class="ad-slot ad-slot--empty" data-ad-slot="0000000000">
@@ -128,5 +129,20 @@
       </div>
     </div>
   </footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var altMap = {"fr":"cookies-publicite-expliques.html"};
+      document.querySelectorAll('.lang-btn').forEach(function (btn) {
+        var href = altMap[btn.getAttribute('data-lang')];
+        if (!href) return;
+        btn.addEventListener('click', function (event) {
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          try { window.localStorage.setItem('sli-lang', btn.getAttribute('data-lang')); } catch (e) {}
+          window.location.href = href;
+        }, true);
+      });
+    });
+  </script>
 </body>
 </html>

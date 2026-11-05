@@ -9,6 +9,8 @@
   <meta name="robots" content="index, follow, max-image-preview:large">
   <link rel="canonical" href="https://weblachgarismail-spec.github.io/smartlifehub/blog/fifo-kitchen-organization.html">
   <link rel="icon" type="image/svg+xml" href="../assets/img/logo.svg">
+  <link rel="alternate" hreflang="fr" href="https://weblachgarismail-spec.github.io/smartlifehub/blog/organisation-cuisine-methode-peps.html">
+  <link rel="alternate" hreflang="ar" href="https://weblachgarismail-spec.github.io/smartlifehub/blog/تنظيم-المطبخ-طريقة-الوارد-أولا.html">
   <link rel="alternate" hreflang="en" href="https://weblachgarismail-spec.github.io/smartlifehub/blog/fifo-kitchen-organization.html">
   <link rel="alternate" hreflang="x-default" href="https://weblachgarismail-spec.github.io/smartlifehub/blog/fifo-kitchen-organization.html">
   <meta property="og:site_name" content="SmartLife Innovations">
@@ -69,7 +71,7 @@
               <span data-i18n="publishedBy">Published by</span>
               <span>SmartLife Innovations</span>
             </div>
-
+            <a class="lang-alt" href="organisation-cuisine-methode-peps.html">Lire en français →</a> <a class="lang-alt" href="تنظيم-المطبخ-طريقة-الوارد-أولا.html">اقرأ بالعربية →</a>
           </header>
           <img class="article-cover" src="https://images.unsplash.com/photo-1601598851547-4302969d0614?w=900&amp;auto=format&amp;fit=crop" alt="FIFO Kitchen Organization: First In, First Out" loading="eager">
           <div class="ad-slot ad-slot--empty" data-ad-slot="0000000000">
@@ -128,5 +130,20 @@
       </div>
     </div>
   </footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var altMap = {"fr":"organisation-cuisine-methode-peps.html","ar":"تنظيم-المطبخ-طريقة-الوارد-أولا.html"};
+      document.querySelectorAll('.lang-btn').forEach(function (btn) {
+        var href = altMap[btn.getAttribute('data-lang')];
+        if (!href) return;
+        btn.addEventListener('click', function (event) {
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          try { window.localStorage.setItem('sli-lang', btn.getAttribute('data-lang')); } catch (e) {}
+          window.location.href = href;
+        }, true);
+      });
+    });
+  </script>
 </body>
 </html>

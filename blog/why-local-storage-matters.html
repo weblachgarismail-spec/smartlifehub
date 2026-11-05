@@ -9,6 +9,7 @@
   <meta name="robots" content="index, follow, max-image-preview:large">
   <link rel="canonical" href="https://weblachgarismail-spec.github.io/smartlifehub/blog/why-local-storage-matters.html">
   <link rel="icon" type="image/svg+xml" href="../assets/img/logo.svg">
+  <link rel="alternate" hreflang="fr" href="https://weblachgarismail-spec.github.io/smartlifehub/blog/pourquoi-stockage-local-important.html">
   <link rel="alternate" hreflang="en" href="https://weblachgarismail-spec.github.io/smartlifehub/blog/why-local-storage-matters.html">
   <link rel="alternate" hreflang="x-default" href="https://weblachgarismail-spec.github.io/smartlifehub/blog/why-local-storage-matters.html">
   <meta property="og:site_name" content="SmartLife Innovations">
@@ -69,7 +70,7 @@
               <span data-i18n="publishedBy">Published by</span>
               <span>SmartLife Innovations</span>
             </div>
-
+            <a class="lang-alt" href="pourquoi-stockage-local-important.html">Lire en français →</a>
           </header>
           <img class="article-cover" src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=900&amp;auto=format&amp;fit=crop" alt="Why Local Storage Matters for Your Data" loading="eager">
           <div class="ad-slot ad-slot--empty" data-ad-slot="0000000000">
@@ -128,5 +129,20 @@
       </div>
     </div>
   </footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var altMap = {"fr":"pourquoi-stockage-local-important.html"};
+      document.querySelectorAll('.lang-btn').forEach(function (btn) {
+        var href = altMap[btn.getAttribute('data-lang')];
+        if (!href) return;
+        btn.addEventListener('click', function (event) {
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          try { window.localStorage.setItem('sli-lang', btn.getAttribute('data-lang')); } catch (e) {}
+          window.location.href = href;
+        }, true);
+      });
+    });
+  </script>
 </body>
 </html>

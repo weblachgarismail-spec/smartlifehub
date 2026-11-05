@@ -131,15 +131,15 @@
   </footer>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      var altLang = 'fr';
-      var altHref = 'minimalisme-numerique-controle.html';
+      var altMap = {"fr":"minimalisme-numerique-controle.html"};
       document.querySelectorAll('.lang-btn').forEach(function (btn) {
-        if (btn.getAttribute('data-lang') !== altLang) return;
+        var href = altMap[btn.getAttribute('data-lang')];
+        if (!href) return;
         btn.addEventListener('click', function (event) {
           event.preventDefault();
           event.stopImmediatePropagation();
-          try { window.localStorage.setItem('sli-lang', altLang); } catch (e) {}
-          window.location.href = altHref;
+          try { window.localStorage.setItem('sli-lang', btn.getAttribute('data-lang')); } catch (e) {}
+          window.location.href = href;
         }, true);
       });
     });

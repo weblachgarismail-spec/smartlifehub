@@ -119,11 +119,23 @@
             ? '<img class="article-cover" src="' + escapeHtml(post.image) + '" alt="' + escapeHtml(post.title) + '">'
             : '';
 
-          var altLink = '';
-          if (post.alternateSlug) {
-            var label = post.alternateLang === 'fr' ? tr('readInFrench') : tr('readInEnglish');
-            altLink = '<a class="lang-alt" href="' + encodeURIComponent(post.alternateSlug) + '.html">' + label + ' →</a>';
-          }
+          var alternates = Array.isArray(post.alternates) ? post.alternates : (post.alternateSlug ? [{ lang: post.alternateLang, slug: post.alternateSlug }] : []);
+          var altLink = alternates.map(function (alt) {
+            var label = alt.lang === 'fr' ? tr('readInFrench') : (alt.lang === 'ar' ? tr('readInArabic') : tr('readInEnglish'));
+            return '<a class="lang-alt" href="' + encodeURIComponent(alt.slug) + '.html">' + label + ' →</a>';
+          }).join(' ');
+          var altMap = {};
+          alternates.forEach(function (alt) { altMap[alt.lang] = encodeURIComponent(alt.slug) + '.html'; });
+          document.querySelectorAll('.lang-btn').forEach(function (btn) {
+            var href = altMap[btn.dataset.lang];
+            if (!href) return;
+            btn.addEventListener('click', function (event) {
+              event.preventDefault();
+              event.stopImmediatePropagation();
+              try { window.localStorage.setItem('sli-lang', btn.dataset.lang); } catch (e) {}
+              window.location.href = href;
+            }, true);
+          });
 
           var publisher = tr('footerPublisher');
 

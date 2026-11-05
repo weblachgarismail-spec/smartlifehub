@@ -10,6 +10,7 @@
   <link rel="canonical" href="https://weblachgarismail-spec.github.io/smartlifehub/blog/how-to-reduce-food-waste-at-home.html">
   <link rel="icon" type="image/svg+xml" href="../assets/img/logo.svg">
   <link rel="alternate" hreflang="fr" href="https://weblachgarismail-spec.github.io/smartlifehub/blog/comment-reduire-gaspillage-alimentaire.html">
+  <link rel="alternate" hreflang="ar" href="https://weblachgarismail-spec.github.io/smartlifehub/blog/تقليل-هدر-الطعام-في-المنزل.html">
   <link rel="alternate" hreflang="en" href="https://weblachgarismail-spec.github.io/smartlifehub/blog/how-to-reduce-food-waste-at-home.html">
   <link rel="alternate" hreflang="x-default" href="https://weblachgarismail-spec.github.io/smartlifehub/blog/how-to-reduce-food-waste-at-home.html">
   <meta property="og:site_name" content="SmartLife Innovations">
@@ -70,7 +71,7 @@
               <span data-i18n="publishedBy">Published by</span>
               <span>SmartLife Innovations</span>
             </div>
-            <a class="lang-alt" href="comment-reduire-gaspillage-alimentaire.html">Lire en français →</a>
+            <a class="lang-alt" href="comment-reduire-gaspillage-alimentaire.html">Lire en français →</a> <a class="lang-alt" href="تقليل-هدر-الطعام-في-المنزل.html">اقرأ بالعربية →</a>
           </header>
           <img class="article-cover" src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=900&amp;auto=format&amp;fit=crop" alt="How to Reduce Food Waste at Home" loading="eager">
           <div class="ad-slot ad-slot--empty" data-ad-slot="0000000000">
@@ -131,15 +132,15 @@
   </footer>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      var altLang = 'fr';
-      var altHref = 'comment-reduire-gaspillage-alimentaire.html';
+      var altMap = {"fr":"comment-reduire-gaspillage-alimentaire.html","ar":"تقليل-هدر-الطعام-في-المنزل.html"};
       document.querySelectorAll('.lang-btn').forEach(function (btn) {
-        if (btn.getAttribute('data-lang') !== altLang) return;
+        var href = altMap[btn.getAttribute('data-lang')];
+        if (!href) return;
         btn.addEventListener('click', function (event) {
           event.preventDefault();
           event.stopImmediatePropagation();
-          try { window.localStorage.setItem('sli-lang', altLang); } catch (e) {}
-          window.location.href = altHref;
+          try { window.localStorage.setItem('sli-lang', btn.getAttribute('data-lang')); } catch (e) {}
+          window.location.href = href;
         }, true);
       });
     });
