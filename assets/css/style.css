@@ -213,13 +213,26 @@ img {
 
 .btn-outline {
   background: transparent;
-  color: var(--white);
-  border: 2px solid rgba(255,255,255,0.6);
+  color: var(--dark-green);
+  border: 2px solid var(--dark-green);
 }
 
 .btn-outline:hover {
-  background: rgba(255,255,255,0.1);
+  background: var(--dark-green);
+  color: var(--white);
+  border-color: var(--dark-green);
+}
+
+/* Light-on-dark variant for the hero section */
+.hero .btn-outline {
+  color: var(--white);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.hero .btn-outline:hover {
+  background: rgba(255, 255, 255, 0.1);
   border-color: var(--white);
+  color: var(--white);
 }
 
 /* Cards */
