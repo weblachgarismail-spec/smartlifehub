@@ -1,9 +1,17 @@
 {
   "name": "SmartLife Innovations",
-  "short_name": "SmartLife Innovations",
-  "start_url": "/",
+  "short_name": "SmartLife",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#FDFBF7",
   "theme_color": "#2D5A27",
-  "icons": []
+  "icons": [
+    {
+      "src": "assets/img/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
 }

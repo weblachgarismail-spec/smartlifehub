@@ -3,26 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title data-i18n="navContact">Contact — SmartLife Innovations</title>
-  <meta name="description" content="Contact SmartLife Innovations — questions, support, or partnership inquiries.">
-  <link rel="canonical" href="https://smartlifeinnovations.com/contact.html">
-  <link rel="stylesheet" href="assets/css/style.css">
+  <title>Contact — SmartLife Innovations</title>
+  <meta name="description" content="Contact SmartLife Innovations — questions, support, corrections or partnership inquiries. Email heroalfa36@gmail.com.">
+  <meta name="author" content="SmartLife Innovations editorial team">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://weblachgarismail-spec.github.io/smartlifehub/contact.html">
+  <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
+  <link rel="alternate" hreflang="en" href="https://weblachgarismail-spec.github.io/smartlifehub/contact.html">
+  <link rel="alternate" hreflang="x-default" href="https://weblachgarismail-spec.github.io/smartlifehub/contact.html">
+  <meta property="og:site_name" content="SmartLife Innovations">
   <meta property="og:title" content="Contact — SmartLife Innovations">
+  <meta property="og:description" content="Questions, support, corrections or partnership inquiries.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://smartlifeinnovations.com/contact.html">
+  <meta property="og:url" content="https://weblachgarismail-spec.github.io/smartlifehub/contact.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#2D5A27">
+  <link rel="stylesheet" href="assets/css/style.css">
   <script src="assets/js/i18n.js" defer></script>
   <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/consent.js" defer></script>
 </head>
 <body>
+  <a class="skip-link" href="#main" data-i18n="skipToContent">Skip to content</a>
   <header class="header">
     <div class="container">
       <nav class="nav">
         <button class="mobile-menu-btn" aria-label="Menu" aria-expanded="false">☰</button>
-        <div class="nav-brand">
-          <a href="index.html"><span>Smart</span>Life Hub</a>
-        </div>
+        <div class="nav-brand"><a href="index.html"><span>Smart</span>Life Innovations</a></div>
         <div class="lang-switch">
-          <button class="lang-btn active" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="en">EN</button>
           <button class="lang-btn" data-lang="fr">FR</button>
           <button class="lang-btn" data-lang="ar">AR</button>
         </div>
@@ -32,41 +41,66 @@
           <li><a href="about.html" data-i18n="navAbout">About</a></li>
           <li><a href="contact.html" data-i18n="navContact">Contact</a></li>
           <li><a href="privacy.html" data-i18n="navPrivacy">Privacy</a></li>
+          <li><a href="publisher.html" data-i18n="navPublisher">Publisher</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <section class="section">
+  <main id="main" class="section">
     <div class="container">
-      <div class="card" style="max-width: 600px; margin: 0 auto;">
-        <h2 data-i18n="contact">Contact</h2>
+      <div class="card" style="max-width: 640px; margin: 0 auto;">
+        <h1 style="color: var(--dark-green); font-size: 1.8rem; margin-bottom: 0.5rem;" data-i18n="contact">Contact</h1>
         <p data-i18n="contactText">Questions or partnership inquiries? Get in touch.</p>
+        <p style="font-size: 0.9rem; color: var(--text-muted);">For privacy requests, corrections, or advertising questions, email <a href="mailto:heroalfa36@gmail.com">heroalfa36@gmail.com</a>. We aim to reply within a few business days.</p>
+
         <form action="https://formspree.io/f/mnpplprv" method="POST" style="margin-top: 1.5rem;">
           <div style="margin-bottom: 1rem;">
-            <label style="display: block; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.3rem;">Your name</label>
-            <input type="text" name="name" required style="width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: 6px; font-family: inherit;">
+            <label for="contact-name" style="display: block; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.3rem;">Your name</label>
+            <input id="contact-name" type="text" name="name" required style="width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: 6px; font-family: inherit;">
           </div>
           <div style="margin-bottom: 1rem;">
-            <label style="display: block; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.3rem;">Email address</label>
-            <input type="email" name="email" required style="width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: 6px; font-family: inherit;">
+            <label for="contact-email" style="display: block; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.3rem;">Email address</label>
+            <input id="contact-email" type="email" name="email" required style="width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: 6px; font-family: inherit;">
           </div>
           <div style="margin-bottom: 1rem;">
-            <label style="display: block; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.3rem;">Message</label>
-            <textarea name="message" required style="width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: 6px; font-family: inherit; min-height: 120px;"></textarea>
+            <label for="contact-message" style="display: block; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.3rem;">Message</label>
+            <textarea id="contact-message" name="message" required style="width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: 6px; font-family: inherit; min-height: 120px;"></textarea>
           </div>
           <input type="hidden" name="_subject" value="New message - SmartLife Innovations">
           <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
         </form>
-        <p style="margin-top: 1.5rem; font-size: 0.9rem; color: var(--text-muted);">
-          Or email us directly: <strong>heroalfa36@gmail.com</strong>
+        <p style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--text-muted);">
+          The contact form is processed by Formspree. We use your message only to reply. See our <a href="privacy.html" data-i18n="navPrivacy">Privacy Policy</a>.
         </p>
+        <div class="publisher-box">
+          <strong data-i18n="publisherTitle">Publisher information</strong><br>
+          SmartLife Innovations — independent publisher. Responsible editor: SmartLife Innovations editorial team. Hosting: GitHub Pages (GitHub, Inc.). <a href="publisher.html" data-i18n="legalNotice">Legal notice</a>.
+        </div>
       </div>
     </div>
-  </section>
+  </main>
 
   <footer>
     <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>SmartLife Innovations</h4>
+          <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem;" data-i18n="footerPublisher">Published by SmartLife Innovations — independent editorial platform.</p>
+        </div>
+        <div class="footer-col">
+          <h4 data-i18n="appsTitle">Apps</h4>
+          <ul><li><a href="apps/freshguard/index.html">FreshGuard</a></li><li><a href="apps/index.html" data-i18n="navApps">Apps</a></li></ul>
+        </div>
+        <div class="footer-col">
+          <h4>Sections</h4>
+          <ul><li><a href="index.html">Home</a></li><li><a href="blog/index.html" data-i18n="navBlog">Blog</a></li><li><a href="about.html" data-i18n="navAbout">About</a></li></ul>
+        </div>
+        <div class="footer-col">
+          <h4 data-i18n="legalNotice">Legal notice</h4>
+          <ul><li><a href="privacy.html" data-i18n="navPrivacy">Privacy Policy</a></li><li><a href="terms.html" data-i18n="navTerms">Terms</a></li><li><a href="publisher.html" data-i18n="navPublisher">Publisher</a></li><li><a href="#" class="js-consent-settings" data-i18n="consentSettings">Cookie settings</a></li></ul>
+        </div>
+      </div>
       <div class="footer-bottom">
         <span data-i18n="footerRights">© 2026 SmartLife Innovations. All rights reserved.</span>
       </div>

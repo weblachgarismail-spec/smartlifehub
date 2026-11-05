@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /admin.html
+Disallow: /blog/post.html
 
-Sitemap: https://smartlifeinnovations.com/sitemap.xml
+Sitemap: https://weblachgarismail-spec.github.io/smartlifehub/sitemap.xml

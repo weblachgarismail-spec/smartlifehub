@@ -3,52 +3,89 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Our Apps — SmartLife Innovations</title>
-  <meta name="description" content="Discover our mobile apps: FreshGuard and more.">
-  <link rel="canonical" href="https://smartlifeinnovations.com/apps/">
+  <title>Apps — SmartLife Innovations</title>
+  <meta name="description" content="Discover SmartLife Innovations mobile apps: FreshGuard, the privacy-first anti-food-waste inventory app with expiry reminders, barcode scanner and recipes.">
+  <meta name="author" content="SmartLife Innovations editorial team">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://weblachgarismail-spec.github.io/smartlifehub/apps/">
+  <link rel="icon" type="image/svg+xml" href="../assets/img/logo.svg">
+  <link rel="alternate" hreflang="en" href="https://weblachgarismail-spec.github.io/smartlifehub/apps/">
+  <link rel="alternate" hreflang="x-default" href="https://weblachgarismail-spec.github.io/smartlifehub/apps/">
+  <meta property="og:site_name" content="SmartLife Innovations">
+  <meta property="og:title" content="Apps — SmartLife Innovations">
+  <meta property="og:description" content="Privacy-first mobile tools built to reduce waste and simplify daily routines.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://weblachgarismail-spec.github.io/smartlifehub/apps/">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1542838132-92c53300491e?w=1200&auto=format&fit=crop">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#2D5A27">
   <link rel="stylesheet" href="../assets/css/style.css">
   <script src="../assets/js/i18n.js" defer></script>
   <script src="../assets/js/main.js" defer></script>
-  <script src="../_data/apps.json" id="apps-data" defer></script>
+  <script src="../assets/js/consent.js" defer></script>
 </head>
 <body>
+  <a class="skip-link" href="#main" data-i18n="skipToContent">Skip to content</a>
   <header class="header">
     <div class="container">
       <nav class="nav">
         <button class="mobile-menu-btn" aria-label="Menu" aria-expanded="false">☰</button>
         <div class="nav-brand"><a href="../index.html"><span>Smart</span>Life Innovations</a></div>
         <div class="lang-switch">
-          <button class="lang-btn active" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="en">EN</button>
           <button class="lang-btn" data-lang="fr">FR</button>
           <button class="lang-btn" data-lang="ar">AR</button>
         </div>
         <ul class="nav-links">
           <li><a href="index.html" data-i18n="navApps">Apps</a></li>
-          <li><a href="../index.html#blog" data-i18n="navBlog">Blog</a></li>
+          <li><a href="../blog/index.html" data-i18n="navBlog">Blog</a></li>
           <li><a href="../about.html" data-i18n="navAbout">About</a></li>
           <li><a href="../contact.html" data-i18n="navContact">Contact</a></li>
           <li><a href="../privacy.html" data-i18n="navPrivacy">Privacy</a></li>
-          <li><a href="../admin.html" style="background:var(--dark-green);color:var(--white);padding:0.4rem 0.8rem;border-radius:6px;font-size:0.85rem;">Admin</a></li>
+          <li><a href="../publisher.html" data-i18n="navPublisher">Publisher</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <section class="section">
+  <main id="main" class="section">
     <div class="container">
       <div class="section-header" style="text-align:left;">
-        <h2>Our Apps</h2>
-        <p>Mobile tools built to reduce waste and simplify daily routines.</p>
+        <h1 style="color: var(--dark-green); font-size: 2rem; margin-bottom: 0.5rem;" data-i18n="appsTitle">Our Apps</h1>
+        <p data-i18n="appsSub">Mobile tools built to reduce waste and simplify daily routines.</p>
       </div>
 
       <div id="appsGrid" class="card-grid">
-        <!-- Apps injected here -->
+        <p class="blog-status" data-i18n="loadingApps">Loading apps…</p>
+      </div>
+
+      <div class="publisher-box">
+        <strong data-i18n="publisherTitle">Publisher information</strong><br>
+        SmartLife Innovations — independent publisher. Contact: <a href="mailto:heroalfa36@gmail.com">heroalfa36@gmail.com</a>. <a href="../publisher.html" data-i18n="legalNotice">Legal notice</a>.
       </div>
     </div>
-  </section>
+  </main>
 
   <footer>
     <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>SmartLife Innovations</h4>
+          <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem;" data-i18n="footerPublisher">Published by SmartLife Innovations — independent editorial platform.</p>
+        </div>
+        <div class="footer-col">
+          <h4 data-i18n="appsTitle">Apps</h4>
+          <ul><li><a href="freshguard/index.html">FreshGuard</a></li><li><a href="index.html" data-i18n="navApps">Apps</a></li></ul>
+        </div>
+        <div class="footer-col">
+          <h4>Sections</h4>
+          <ul><li><a href="../index.html">Home</a></li><li><a href="../blog/index.html" data-i18n="navBlog">Blog</a></li><li><a href="../about.html" data-i18n="navAbout">About</a></li></ul>
+        </div>
+        <div class="footer-col">
+          <h4 data-i18n="legalNotice">Legal notice</h4>
+          <ul><li><a href="../privacy.html" data-i18n="navPrivacy">Privacy Policy</a></li><li><a href="../terms.html" data-i18n="navTerms">Terms</a></li><li><a href="../publisher.html" data-i18n="navPublisher">Publisher</a></li><li><a href="#" class="js-consent-settings" data-i18n="consentSettings">Cookie settings</a></li></ul>
+        </div>
+      </div>
       <div class="footer-bottom">
         <span data-i18n="footerRights">© 2026 SmartLife Innovations. All rights reserved.</span>
       </div>
@@ -56,26 +93,53 @@
   </footer>
 
   <script>
-    fetch('../_data/apps.json')
-      .then(r => r.json())
-      .then(data => {
-        const grid = document.getElementById('appsGrid');
-        data.apps.forEach(app => {
-          const featuresHtml = app.features.map(f => `<li style="color:var(--text-muted);font-size:0.9rem;">${f}</li>`).join('');
-          const el = document.createElement('article');
-          el.className = 'card';
-          el.innerHTML = `
-            <div style="font-size:2.5rem;margin-bottom:1rem;">${app.icon}</div>
-            <h3 style="color:var(--dark-green);margin-bottom:0.5rem;">${app.name}</h3>
-            <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:1rem;">${app.tagline}</p>
-            <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:1rem;">${app.description}</p>
-            <ul style="margin-bottom:1rem;">${featuresHtml}</ul>
-            <a href="freshguard/" class="btn btn-primary" style="width:100%;justify-content:center;">View Details</a>
-          `;
-          grid.appendChild(el);
+    (function () {
+      var grid = document.getElementById('appsGrid');
+      var apps = [];
+
+      function render() {
+        if (!grid || !apps.length) return;
+        var lang = typeof getLang === 'function' ? getLang() : 'en';
+        var detailsLabel = typeof t === 'function' ? t('viewDetails') : 'View details';
+
+        grid.innerHTML = apps.map(function (app) {
+          var tagline = app['tagline_' + lang] || app.tagline || '';
+          var description = app['description_' + lang] || app.description || '';
+          var features = app['features_' + lang] || app.features || [];
+          var featureItems = features.map(function (feature) {
+            return '<li style="color:var(--text-muted);font-size:0.9rem;">' + feature + '</li>';
+          }).join('');
+
+          return '<article class="card">' +
+            '<div style="font-size:2.5rem;margin-bottom:1rem;">' + (app.icon || '📱') + '</div>' +
+            '<h3 style="color:var(--dark-green);margin-bottom:0.5rem;">' + app.name + '</h3>' +
+            '<p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:1rem;">' + tagline + '</p>' +
+            '<p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:1rem;">' + description + '</p>' +
+            '<ul style="margin-bottom:1rem;">' + featureItems + '</ul>' +
+            '<a href="' + (app.detailUrl || 'freshguard/index.html') + '" class="btn btn-primary" style="width:100%;justify-content:center;">' + detailsLabel + '</a>' +
+          '</article>';
+        }).join('');
+      }
+
+      document.addEventListener('languagechange', render);
+
+      fetch('../_data/apps.json', { cache: 'no-store' })
+        .then(function (r) {
+          if (!r.ok) throw new Error('HTTP ' + r.status);
+          return r.json();
+        })
+        .then(function (data) {
+          apps = Array.isArray(data.apps) ? data.apps : [];
+          render();
+        })
+        .catch(function (err) {
+          console.error(err);
+          if (grid) {
+            var message = typeof t === 'function' ? t('errorApps') : 'Unable to load apps.';
+            grid.innerHTML = '<p class="blog-status">' + message + '</p>';
+          }
         });
-      })
-      .catch(err => console.error(err));
+    })();
   </script>
 </body>
 </html>

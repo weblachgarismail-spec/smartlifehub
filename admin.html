@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
   <title>SmartLife Innovations — Admin Editor</title>
   <link rel="stylesheet" href="assets/css/style.css">
   <style>
@@ -231,18 +232,29 @@
     const blogForm = document.getElementById('blogForm');
     blogForm.addEventListener('submit', (e) => {
       e.preventDefault();
+      const category = document.getElementById('blogCategory').value;
+      const lang = document.getElementById('blogLang').value;
+      const labels = {
+        'smart-kitchen': { en: 'Smart Kitchen', fr: 'Cuisine intelligente' },
+        'digital-life': { en: 'Digital Life', fr: 'Vie numérique' },
+        'privacy-security': { en: 'Privacy & Security', fr: 'Confidentialité et sécurité' },
+        news: { en: 'News', fr: 'Actualités' }
+      };
       const post = {
         id: document.getElementById('blogId').value || Date.now().toString(),
         title: document.getElementById('blogTitle').value,
         slug: document.getElementById('blogSlug').value,
-        category: document.getElementById('blogCategory').value,
-        categoryLabel: document.getElementById('blogCategory').options[document.getElementById('blogCategory').selectedIndex].text,
+        category: category,
+        categoryLabel: (labels[category] && labels[category][lang]) || category,
         excerpt: document.getElementById('blogExcerpt').value,
         content: document.getElementById('blogContent').value,
         image: document.getElementById('blogImage').value,
         readTime: document.getElementById('blogReadTime').value || '',
         date: document.getElementById('blogDate').value || new Date().toISOString().split('T')[0],
-        lang: document.getElementById('blogLang').value
+        lang: lang,
+        author: 'SmartLife Innovations editorial team',
+        publisher: 'SmartLife Innovations',
+        updated: new Date().toISOString().split('T')[0]
       };
 
       if (editId) {
@@ -416,7 +428,7 @@
           category: "smart-kitchen", categoryLabel: "Smart Kitchen",
           excerpt: "A comparison of top apps to prevent food waste, featuring FreshGuard.",
           content: "<p>A comparison of top apps to prevent food waste, featuring FreshGuard.</p>",
-          image: "https://images.unsplash.com/photo-1517683974241-9379007298d1?w=900&auto=format&fit=crop",
+          image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=900&auto=format&fit=crop",
           readTime: "6 min", date: "2026-10-22", lang: "en"
         },
         {

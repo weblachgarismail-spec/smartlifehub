@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600" role="img" aria-label="SmartLife Innovations">
+  <rect width="900" height="600" fill="#E8EDE4"/>
+  <g fill="none" stroke="#2D5A27" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" opacity="0.5">
+    <rect x="330" y="210" width="240" height="180" rx="14"/>
+    <circle cx="395" cy="270" r="22"/>
+    <path d="M350 380l70-70 55 55 35-35 60 50"/>
+  </g>
+</svg>

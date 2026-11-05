@@ -4,7 +4,11 @@
       "id": "freshguard",
       "name": "FreshGuard",
       "tagline": "Anti-food-waste inventory with expiry reminders",
+      "tagline_fr": "Inventaire anti-gaspillage avec rappels de péremption",
+      "tagline_ar": "جرد لمكافحة هدر الطعام مع تذكيرات بتاريخ الصلاحية",
       "description": "FreshGuard helps you track food expiry dates, reduce waste, and save money. Features barcode scanner, local notifications, recipes matched to your stock, and savings statistics. 100% offline, no account, no cloud.",
+      "description_fr": "FreshGuard vous aide à suivre les dates de péremption, à réduire le gaspillage et à économiser de l'argent. Scanner de codes-barres, notifications locales, recettes adaptées à votre stock et statistiques d'économies. 100 % hors ligne, sans compte, sans cloud.",
+      "description_ar": "يساعدك FreshGuard على تتبع تواريخ صلاحية الطعام، وتقليل الهدر، وتوفير المال. ماسح باركود، وإشعارات محلية، ووصفات مبنية على مخزونك، وإحصاءات التوفير. يعمل دون اتصال بنسبة 100٪، دون حساب أو سحابة.",
       "category": "Smart Kitchen",
       "icon": "🥦",
       "features": [
@@ -17,7 +21,28 @@
         "4 languages: EN / FR / ES / AR",
         "Dark mode and responsive design"
       ],
+      "features_fr": [
+        "Inventaire par emplacement (frigo, congélateur, placard)",
+        "Scanner de codes-barres avec autorisation caméra au bon moment",
+        "Types de dates « à consommer avant » et « de préférence avant » que vous contrôlez",
+        "Rappels locaux de péremption (sans internet)",
+        "Plus de 14 recettes adaptées à votre stock réel",
+        "Statistiques d'économies : consommé + donné − jeté",
+        "4 langues : EN / FR / ES / AR",
+        "Mode sombre et design responsive"
+      ],
+      "features_ar": [
+        "الجرد حسب الموقع (الثلاجة، المجمد، المؤن)",
+        "ماسح باركود مع إذن الكاميرا في الوقت المناسب",
+        "أنواع تواريخ \"استهلك قبل\" و\"يفضل قبل\" التي تتحكم بها",
+        "تذكيرات محلية بتاريخ الصلاحية (دون إنترنت)",
+        "أكثر من 14 وصفة مبنية على مخزونك الفعلي",
+        "إحصاءات التوفير: المستهلك + المتبرع به − المهدر",
+        "4 لغات: الإنجليزية / الفرنسية / الإسبانية / العربية",
+        "الوضع الداكن وتصميم متجاوب"
+      ],
       "screenshots": [],
+      "detailUrl": "freshguard/index.html",
       "downloadLinks": {
         "playStore": "#",
         "appStore": "#",

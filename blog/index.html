@@ -3,12 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title data-i18n="blogTitle">Blog — SmartLife Innovations</title>
-  <meta name="description" content="SmartLife Innovations blog — practical guides on food waste, kitchen organization, productivity and digital life.">
-  <link rel="canonical" href="https://smartlifeinnovations.com/blog/">
+  <title data-i18n="blogPageTitle">Blog — SmartLife Innovations</title>
+  <meta name="description" content="SmartLife Innovations blog — practical guides on food waste, kitchen organization, productivity and digital life. Read in English and French.">
+  <meta name="author" content="SmartLife Innovations editorial team">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://weblachgarismail-spec.github.io/smartlifehub/blog/">
+  <link rel="icon" type="image/svg+xml" href="../assets/img/logo.svg">
+  <link rel="alternate" hreflang="en" href="https://weblachgarismail-spec.github.io/smartlifehub/blog/">
+  <link rel="alternate" hreflang="fr" href="https://weblachgarismail-spec.github.io/smartlifehub/blog/?lang=fr">
+  <link rel="alternate" hreflang="ar" href="https://weblachgarismail-spec.github.io/smartlifehub/blog/?lang=ar">
+  <link rel="alternate" hreflang="x-default" href="https://weblachgarismail-spec.github.io/smartlifehub/blog/">
+  <meta property="og:site_name" content="SmartLife Innovations">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Blog — SmartLife Innovations">
+  <meta property="og:description" content="Practical guides on food waste, kitchen organization, productivity and digital life.">
+  <meta property="og:url" content="https://weblachgarismail-spec.github.io/smartlifehub/blog/">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1542838132-92c53300491e?w=1200&auto=format&fit=crop">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Blog — SmartLife Innovations">
+  <meta name="twitter:description" content="Practical guides on food waste, kitchen organization, productivity and digital life.">
+  <meta name="theme-color" content="#2D5A27">
   <link rel="stylesheet" href="../assets/css/style.css">
   <script src="../assets/js/i18n.js" defer></script>
   <script src="../assets/js/main.js" defer></script>
+  <script src="../assets/js/consent.js" defer></script>
   <style>
     .blog-filters {
       display: flex;
@@ -57,54 +75,99 @@
       color: var(--text-muted);
       grid-column: 1 / -1;
     }
+    .lang-badge {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.1rem 0.4rem;
+      color: var(--text-muted);
+    }
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#main" data-i18n="skipToContent">Skip to content</a>
   <header class="header">
     <div class="container">
       <nav class="nav">
         <button class="mobile-menu-btn" aria-label="Menu" aria-expanded="false">☰</button>
         <div class="nav-brand"><a href="../index.html"><span>Smart</span>Life Innovations</a></div>
         <div class="lang-switch">
-          <button class="lang-btn active" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="en">EN</button>
           <button class="lang-btn" data-lang="fr">FR</button>
           <button class="lang-btn" data-lang="ar">AR</button>
         </div>
         <ul class="nav-links">
-          <li><a href="../index.html" data-i18n="navApps">Apps</a></li>
+          <li><a href="../apps/index.html" data-i18n="navApps">Apps</a></li>
           <li><a href="index.html" data-i18n="navBlog">Blog</a></li>
           <li><a href="../about.html" data-i18n="navAbout">About</a></li>
           <li><a href="../contact.html" data-i18n="navContact">Contact</a></li>
           <li><a href="../privacy.html" data-i18n="navPrivacy">Privacy</a></li>
-          <li><a href="../admin.html" style="background:var(--dark-green);color:var(--white);padding:0.4rem 0.8rem;border-radius:6px;font-size:0.85rem;">Admin</a></li>
+          <li><a href="../publisher.html" data-i18n="navPublisher">Publisher</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <section class="section">
+  <main id="main" class="section">
     <div class="container">
       <div class="section-header">
-        <h2 data-i18n="blogTitle">Latest Articles</h2>
+        <h1 style="color: var(--dark-green); font-size: 2rem; margin-bottom: 0.5rem;" data-i18n="blogTitle">Latest Articles</h1>
         <p data-i18n="blogSub">Practical guides on food waste, kitchen organization, productivity and digital life.</p>
       </div>
 
-      <div class="blog-filters" role="group" aria-label="Filter articles by category">
-        <button class="cat-filter active" data-filter="all" aria-pressed="true">All</button>
-        <button class="cat-filter" data-filter="smart-kitchen" aria-pressed="false">Smart Kitchen</button>
-        <button class="cat-filter" data-filter="digital-life" aria-pressed="false">Digital Life</button>
-        <button class="cat-filter" data-filter="privacy-security" aria-pressed="false">Privacy &amp; Security</button>
-        <button class="cat-filter" data-filter="news" aria-pressed="false">News</button>
+      <div class="blog-filters" role="group" data-i18n-aria="blogFiltersLabel" aria-label="Filter articles by category">
+        <button class="cat-filter active" data-filter="all" aria-pressed="true" data-i18n="filterAll">All</button>
+        <button class="cat-filter" data-filter="smart-kitchen" aria-pressed="false" data-i18n="filterKitchen">Smart Kitchen</button>
+        <button class="cat-filter" data-filter="digital-life" aria-pressed="false" data-i18n="filterDigital">Digital Life</button>
+        <button class="cat-filter" data-filter="privacy-security" aria-pressed="false" data-i18n="filterPrivacy">Privacy &amp; Security</button>
+        <button class="cat-filter" data-filter="news" aria-pressed="false" data-i18n="filterNews">News</button>
       </div>
 
       <div id="blogGrid" class="blog-grid" aria-live="polite">
-        <p class="blog-status">Loading articles…</p>
+        <p class="blog-status" data-i18n="loadingArticles">Loading articles…</p>
+      </div>
+
+      <div class="ad-slot ad-slot--empty" data-ad-slot="0000000000">
+        <span class="ad-label" data-i18n="adLabel">Advertisement</span>
       </div>
     </div>
-  </section>
+  </main>
 
   <footer>
     <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>SmartLife Innovations</h4>
+          <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem;" data-i18n="footerPublisher">Published by SmartLife Innovations — independent editorial platform.</p>
+        </div>
+        <div class="footer-col">
+          <h4 data-i18n="appsTitle">Apps</h4>
+          <ul>
+            <li><a href="../apps/freshguard/index.html">FreshGuard</a></li>
+            <li><a href="../apps/index.html" data-i18n="navApps">Apps</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Sections</h4>
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="index.html" data-i18n="navBlog">Blog</a></li>
+            <li><a href="../about.html" data-i18n="navAbout">About</a></li>
+            <li><a href="../contact.html" data-i18n="navContact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 data-i18n="legalNotice">Legal notice</h4>
+          <ul>
+            <li><a href="../privacy.html" data-i18n="navPrivacy">Privacy Policy</a></li>
+            <li><a href="../terms.html" data-i18n="navTerms">Terms</a></li>
+            <li><a href="../publisher.html" data-i18n="navPublisher">Publisher</a></li>
+            <li><a href="#" class="js-consent-settings" data-i18n="consentSettings">Cookie settings</a></li>
+          </ul>
+        </div>
+      </div>
       <div class="footer-bottom">
         <span data-i18n="footerRights">© 2026 SmartLife Innovations. All rights reserved.</span>
       </div>
@@ -120,18 +183,18 @@
       var posts = [];
       var activeFilter = 'all';
 
+      function tr(key) {
+        return typeof t === 'function' ? t(key) : key;
+      }
+
       function formatDate(value) {
         var d = new Date(value);
         if (!value || isNaN(d.getTime())) return '';
-        return d.toLocaleDateString('en-US', {
+        return d.toLocaleDateString(getLang() === 'fr' ? 'fr-FR' : 'en-US', {
           year: 'numeric',
           month: 'long',
           day: 'numeric'
         });
-      }
-
-      function articleUrl(slug) {
-        return 'post.html?slug=' + encodeURIComponent(slug);
       }
 
       function escapeHtml(value) {
@@ -145,7 +208,6 @@
 
       function render(filter) {
         activeFilter = filter || 'all';
-
         var visible = activeFilter === 'all'
           ? posts
           : posts.filter(function (post) {
@@ -153,33 +215,37 @@
             });
 
         if (!visible.length) {
-          grid.innerHTML = '<p class="blog-status">No articles found in this category yet.<br><small>Try another category.</small></p>';
+          grid.innerHTML = '<p class="blog-status">' + tr('noArticles') + '<br><small>' + tr('tryAnother') + '</small></p>';
           return;
         }
 
         grid.innerHTML = visible.map(function (post) {
-          var url = articleUrl(post.slug);
+          var url = post.static
+            ? encodeURIComponent(post.slug) + '.html'
+            : 'post.html?slug=' + encodeURIComponent(post.slug);
           var title = escapeHtml(post.title);
           var excerpt = escapeHtml(post.excerpt);
           var image = escapeHtml(post.image || '');
           var category = escapeHtml(post.categoryLabel || post.category || '');
           var readTime = escapeHtml(post.readTime || '');
           var date = escapeHtml(formatDate(post.date));
+          var isFr = post.lang === 'fr';
 
           return '' +
-            '<article class="blog-card">' +
+            '<article class="blog-card" lang="' + (isFr ? 'fr' : 'en') + '">' +
               '<a class="blog-card-media" href="' + url + '" tabindex="-1" aria-hidden="true">' +
                 '<img src="' + image + '" alt="' + title + '" loading="lazy">' +
               '</a>' +
               '<div class="blog-content">' +
                 '<div class="blog-meta">' +
-                  '<span style="color:var(--dark-green);font-weight:600;">' + category + '</span>' +
+                  '<span class="article-category">' + category + '</span>' +
                   (readTime ? '<span>' + readTime + '</span>' : '') +
                   (date ? '<span>' + date + '</span>' : '') +
+                  '<span class="lang-badge">' + (isFr ? 'FR' : 'EN') + '</span>' +
                 '</div>' +
                 '<h3><a href="' + url + '">' + title + '</a></h3>' +
                 '<p>' + excerpt + '</p>' +
-                '<a class="read-more" href="' + url + '">Read more &rarr;</a>' +
+                '<a class="read-more" href="' + url + '">' + tr('readMore') + '</a>' +
               '</div>' +
             '</article>';
         }).join('');
@@ -201,6 +267,10 @@
         });
       });
 
+      document.addEventListener('languagechange', function () {
+        render(activeFilter);
+      });
+
       fetch('../_data/blog.json', { cache: 'no-store' })
         .then(function (response) {
           if (!response.ok) {
@@ -214,7 +284,7 @@
         })
         .catch(function (error) {
           console.error('Unable to load blog data:', error);
-          grid.innerHTML = '<p class="blog-status">Unable to load articles. Please check the data file.</p>';
+          grid.innerHTML = '<p class="blog-status">' + tr('errorArticles') + '</p>';
         });
     })();
   </script>
